@@ -218,6 +218,7 @@ const kebabCase = (str: string) => {
 @font-face {
   font-family: Inter;
   src: url(Inter.ttf);
+  font-display: swap;
 }
 
 .selected {
