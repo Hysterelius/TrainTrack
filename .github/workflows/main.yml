@@ -3,8 +3,7 @@ on:
   push:
     branches:
       - main
-    paths-ignore: # Only runs workflow when blog specific files are updated
-      - ".github/**" # Anytime a workflow file is updated
+
 name: Build Vite website
 jobs:
   build-bundle-deploy:
