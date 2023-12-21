@@ -1,5 +1,5 @@
 <template>
-  <img src="./assets/train.svg" class="title-svg" />
+  <sTrain class="title-svg" />
   <button @click="toggleEditMode" class="modes svg-icon" :title="isEditMode ? viewHoverText : editHoverText">
     <sEdit v-if="!isEditMode" />
     <sView v-else />
@@ -68,6 +68,9 @@ import sAdd from './assets/icons/plus.svg';
 import sDelete from './assets/icons/trash.svg';
 import sLight from './assets/icons/sun.svg';
 import sDark from './assets/icons/moon.svg';
+
+import sTrain from './assets/train.svg';
+import './Inter.ttf';
 
 let isEditMode = ref(false);
 const editHoverText = ref('Edit');
@@ -145,40 +148,10 @@ const toggleDarkMode = () => {
 };
 
 
-// const changeRank = (subject: Subject, event: Event) => {
-//   if ((event.target as HTMLElement).textContent) {
-//     subject.rank = parseInt((event.target as HTMLElement).textContent ?? '1', 10);
-//   }
-//   console.log(subjects);
-// };
-
-// const changeTotal = (subject: Subject, event: Event) => {
-//   if ((event.target as HTMLElement).textContent) {
-//     subject.total = parseInt((event.target as HTMLElement).textContent ?? '1', 10);
-//   }
-
-//   checkRanks(subject, event);
-//   console.log(subjects);
-// };
-
-
-// const checkRanks = (subject: Subject, event: Event) => {
-//   if (subject.rank > subject.total) {
-//     (event.target as HTMLElement).classList.add('error');
-//   } else {
-//     if ((event.target as HTMLElement).classList.contains('error')) {
-//       (event.target as HTMLElement).classList.remove('error');
-//     }
-//   }
-// };
-
 const checkRanks = (subject: Subject) => {
   return subject.rank > subject.total;
 };
 
-// const changeRank1 = (subject: { name: string; currentText: string }, newText: string) => {
-//   subject.currentText = newText;
-// };
 
 // Save subjects to local storage whenever they change
 watch(subjects, async () => {
