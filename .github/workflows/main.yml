@@ -1,0 +1,36 @@
+# .github/workflow/main.yml
+on:
+  push:
+    branches:
+      - main
+    paths-ignore: # Only runs workflow when blog specific files are updated
+      - ".github/**" # Anytime a workflow file is updated
+name: Build Vite website
+jobs:
+  build-bundle-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      # Check-out repository under $GITHUB_WORKSPACE
+      - name: Checkout 📋
+        uses: actions/checkout@v4
+        with:
+          submodules: true
+      - name: Setup Node 🪁
+        uses: actions/setup-node@v3
+        with:
+          cache: 'npm'
+
+      - name: Install dependencies ⬇️
+        run: npm install
+
+      - name: Build project 🏗️
+        run: npm run build
+
+        # Deploy to Cloudflare Pages
+      - name: Deploy 🚀
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.PROJECT_NAME }}
+          directory: dist
