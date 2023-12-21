@@ -1,4 +1,4 @@
-# Project Name
+# TrainTrack
 
 This is a simple application to track your progress with achievements with clear, large status indicators. It is meant to be motivating and was designed for university students to track their progress in their courses (especially with ranks).
 
