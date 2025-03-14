@@ -6,29 +6,26 @@ on:
 
 name: Build Vite website
 jobs:
-  build-bundle-deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       # Check-out repository under $GITHUB_WORKSPACE
-      - name: Checkout 📋
+      - name: Checkout 🛎️
         uses: actions/checkout@v4
-      - name: Setup pnpm environment 📦
-        uses: pnpm/action-setup@v2
         with:
-          version: 8.12.1
-      - name: Setup Node ⚙️
-        uses: actions/setup-node@v4
+          submodules: true
+      # Build static pages w/ Vite
+      - name: Setup pnpm ⚙️
+        uses: pnpm/action-setup@v4
         with:
-          node-version: 16
-          cache: 'pnpm'
+          version: 10
       - name: Install dependencies 🧱
         run: pnpm install
       - name: Build 🏗️
         run: pnpm run build
       - name: Deploy 🚀
-        uses: cloudflare/pages-action@v1
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: ${{ secrets.PROJECT_NAME }}
-          directory: dist
+          command: pages deploy dist --project-name=${{ secrets.CLOUDFLARE_PROJECT_NAME }}
